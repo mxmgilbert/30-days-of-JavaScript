@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Console Tricks!</title>
+</head>
+<body>
+
+<p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+<script>
+    const dogs = [{name: 'Snickers', age: 2}, {name: 'hugo', age: 8}];
+
+    function makeGreen() {
+        const p = document.querySelector('p');
+        p.style.color = '#BADA55';
+        p.style.fontSize = '50px';
+    }
+
+    // Regular
+    console.log('hi');
+    // Interpolated
+    const name = 'Max'
+    console.log(`use Js inside string with template string, like for your name : ${name}`);
+    // Styled
+    console.log('%c stylised console log', 'font-size: 30px');
+    // warning!
+    console.warn('becareful !');
+    // Error :|
+    console.error('That\'s an error');
+    // Info
+    console.info('ladies and gentlemen...')
+    // Testing
+    const p = document.querySelector('p');
+    console.assert(p.classList.contains('ouch'), 'that is wrong');
+    // clearing
+    console.clear();
+    // Viewing DOM Elements
+    console.dir(p);
+    // Grouping together
+    dogs.forEach( dog => {
+        console.groupCollapsed(`${dog.name}`);
+        console.log(`${dog.name} is ${dog.age}  years old.`);
+        console.groupEnd(`${dog.name}`);
+    });
+    // counting
+    console.count('Max');
+    // timing
+    console.time('fetch data');
+    fetch('https://api.github.com/users/mxmgilbert')
+        .then(data => data.json())
+        .then(data => {
+            console.timeEnd('fetch data');
+            console.log(data);
+        });
+
+    // table
+    console.table(dogs);
+
+</script>
+</body>
+</html>
