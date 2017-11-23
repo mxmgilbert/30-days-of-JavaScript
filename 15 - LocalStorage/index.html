@@ -24,6 +24,7 @@
         <input type="submit" value="+ Add Item">
     </form>
     <button class="clearList">Clear list</button>
+    <button class="checkAll">Check all</button>
 </div>
 
 <script>
@@ -31,6 +32,7 @@
     const itemsList = document.querySelector('.plates');
     const items = JSON.parse(localStorage.getItem('items')) || [];
     const clear = document.querySelector('.clearList');
+    const checkItems = document.querySelector('.checkAll');
 
     /**
      * Handle form submit and add item into the arrays items
@@ -93,11 +95,23 @@
     }
 
     /**
+     * Check all items in the list and update LocalStorage
+     */
+    function checkAll() {
+        items.forEach(item => {
+            item.done = true;
+        });
+        localStorage.setItem('items', JSON.stringify(items));
+        populateList(items, itemsList);
+    }
+
+    /**
      * Event listeners
      */
     addItems.addEventListener('submit', addItem);
     itemsList.addEventListener('click', toggleDone);
     clear.addEventListener('click', clearList);
+    checkItems.addEventListener('click', checkAll);
 
     // Populate html after page loaded using localStorage for items
     populateList(items, itemsList)
